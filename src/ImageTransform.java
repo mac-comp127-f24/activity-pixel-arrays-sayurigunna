@@ -6,26 +6,39 @@ import edu.macalester.graphics.Image;
 public class ImageTransform {
 
     public static Image lighten(Image srcImage) {
-        // TODO: Task 1
+        float pixels[] = srcImage.toFloatArray(Image.PixelFormat.RGB);
 
-        throw new UnsupportedOperationException("Method not yet defined");
+        for(int i = 0; i < pixels.length; i++) {
+            pixels[i] *= 1.5;
+        }
+        return new Image((int) srcImage.getWidth(), (int) srcImage.getHeight(), pixels, Image.PixelFormat.RGB);
     }
 
 
     public static Image greenShift(Image srcImage) {
-        // TODO: Task 2
+        float pixels[] = srcImage.toFloatArray(Image.PixelFormat.RGB);
 
-        throw new UnsupportedOperationException("Method not yet defined");
+        for(int i = 1; i < pixels.length; i += 3) {
+            pixels[i] *= 1.25;
+        }
+        return new Image((int) srcImage.getWidth(), (int) srcImage.getHeight(), pixels, Image.PixelFormat.RGB);
     }
 
     public static Image invert(Image srcImage) {
-        // TODO: Task 3
+        byte pixels[] = srcImage.toByteArray(Image.PixelFormat.RGB);
 
-        throw new UnsupportedOperationException("Method not yet defined");
+        for(int i = 0; i < pixels.length; i++) {
+            pixels[i] = (byte) (255 - pixels[i]);
+        }
+        return new Image((int) srcImage.getWidth(), (int) srcImage.getHeight(), pixels, Image.PixelFormat.RGB);
     }
 
+    //public static Image rotate(Image srcImage) {
+
+    //}
+
     public static void main(String[] args) {
-        Image srcImage = new Image("mscs-shield.png");
+        Image srcImage = new Image("1200px-Cow_on_Pupers.jpg");
     
         Scanner scan = new Scanner(System.in);
         System.out.println("How would you like to transform your image?");
